@@ -5,6 +5,9 @@ export const API_BASE_URL = "https://route-posts.routemisr.com";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 api.interceptors.request.use((config) => {
@@ -27,17 +30,26 @@ export function isRequestCanceled(error: unknown): boolean {
 // Safely extract messages from different API response formats.
 function extractMessages(value: unknown): string[] {
   if (typeof value === "string") {
-    return value.trim() ? [value] : [];
+    return value.trim() ? [value.trim()] : [];
   }
 
   if (Array.isArray(value)) {
-    return value.flatMap((item) => extractMessages(item));
+    return value.flatMap(extractMessages);
   }
 
   if (value && typeof value === "object") {
-    return Object.values(value).flatMap((item) =>
-      extractMessages(item)
-    );
+    const obj = value as Record<string, unknown>;
+
+    // Prefer common message fields.
+    if (typeof obj.message === "string") {
+      return extractMessages(obj.message);
+    }
+
+    if (typeof obj.msg === "string") {
+      return extractMessages(obj.msg);
+    }
+
+    return Object.values(obj).flatMap(extractMessages);
   }
 
   return [];
@@ -52,30 +64,44 @@ export function getApiError(error: unknown): string {
         }
       | undefined;
 
-    // Handle validation errors whether they are arrays,
-    // objects, or strings.
+    // Handle validation errors.
     const validationErrors = extractMessages(data?.errors);
 
     if (validationErrors.length > 0) {
       return [...new Set(validationErrors)].join(" - ");
     }
 
-    // Handle normal API messages.
-    const message = extractMessages(data?.message);
+    // Handle API messages.
+    const messages = extractMessages(data?.message);
 
-    if (message.length > 0) {
-      return message.join(" - ");
+    if (messages.length > 0) {
+      return [...new Set(messages)].join(" - ");
     }
 
-    if (error.response?.status === 401) {
+    // Handle HTTP status codes safely.
+    const status = error.response?.status;
+
+    if (status === 400) {
+      return "Invalid request. Please check your information.";
+    }
+
+    if (status === 401) {
       return "Invalid email or password. Please try again.";
     }
 
-    if (error.response?.status === 404) {
+    if (status === 403) {
+      return "You are not allowed to perform this action.";
+    }
+
+    if (status === 404) {
       return "The requested resource was not found.";
     }
 
-    if (error.response?.status >= 500) {
+    if (status === 422) {
+      return "Please check your submitted information.";
+    }
+
+    if (status !== undefined && status >= 500) {
       return "Server error. Please try again later.";
     }
 
@@ -94,7 +120,14 @@ export function getApiError(error: unknown): string {
 }
 
 export function unwrapData<T>(payload: unknown): T {
-  const p = payload as { data?: T };
+  if (
+    payload !== null &&
+    typeof payload === "object" &&
+    "data" in payload
+  ) {
+    const response = payload as { data?: T };
+    return (response.data ?? payload) as T;
+  }
 
-  return (p?.data ?? payload) as T;
+  return payload as T;
 }
