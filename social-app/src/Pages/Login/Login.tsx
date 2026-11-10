@@ -43,16 +43,43 @@ export default function Login() {
   };
 
   const inputClassName =
-    "vybe-input mb-1 w-full rounded-2xl border border-[#D8C8FF] bg-[#F3EEFF] p-3.5 text-[#211936] placeholder:text-[#958BAA] outline-none transition-all duration-200 focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 dark:border-[#51416F] dark:bg-[#25213A] dark:text-[#F5F0FF] dark:placeholder:text-[#AAA0BE] dark:focus:border-[#A78BFA] dark:focus:ring-[#A78BFA]/20";
+    "mb-1 w-full rounded-2xl border border-[#D8C8FF] bg-[#F3EEFF] p-3.5 text-[#211936] placeholder:text-[#958BAA] outline-none transition-all duration-200 focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 dark:border-[#51416F] dark:bg-[#25213A] dark:text-[#F5F0FF] dark:placeholder:text-[#AAA0BE] dark:focus:border-[#A78BFA]";
 
   return (
-    <div className="vybe-auth flex min-h-[calc(100vh-80px)] items-center justify-center py-10">
+    <div
+      className="
+        relative flex min-h-[calc(100dvh-80px)]
+        items-center justify-center overflow-hidden py-10 px-4
+        bg-[radial-gradient(ellipse_60%_50%_at_5%_5%,rgba(139,92,246,0.13),transparent_70%),radial-gradient(ellipse_55%_50%_at_95%_65%,rgba(196,181,253,0.22),transparent_75%),linear-gradient(180deg,#F8F7FE_0%,#F7F5FF_55%,#F0EAFE_100%)]
+        dark:bg-[radial-gradient(ellipse_60%_50%_at_5%_5%,rgba(114,76,212,0.16),transparent_70%),radial-gradient(ellipse_55%_50%_at_95%_65%,rgba(131,102,225,0.13),transparent_75%),linear-gradient(180deg,#101120_0%,#17152B_55%,#211A38_100%)]
+      "
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="vybe-auth-card w-full max-w-md rounded-[2rem] border border-violet-100 bg-white p-8 shadow-[0_24px_80px_rgba(68,46,125,.12)] sm:p-10 dark:border-[#38304F] dark:bg-[#1C1B32]"
+        className="
+          relative z-10 w-full max-w-md
+          rounded-[2rem] border border-violet-100
+          bg-white/95 p-8
+          shadow-[0_24px_80px_rgba(68,46,125,0.12)]
+          backdrop-blur-xl
+          sm:p-10
+          dark:border-[#38304F]
+          dark:bg-[#1C1B32]/95
+          dark:shadow-[0_24px_80px_rgba(0,0,0,0.25)]
+        "
       >
         <div className="mb-9 text-center">
-          <span className="vybe-pill">
+          <span
+            className="
+              inline-flex items-center rounded-full
+              border border-[#E9DFFF]
+              bg-[#F2ECFF] px-4 py-2
+              text-xs font-bold text-[#8050D5]
+              dark:border-[#534080]
+              dark:bg-[#34294E]
+              dark:text-[#D5BEFF]
+            "
+          >
             ✦ Welcome to your space
           </span>
 
@@ -68,7 +95,14 @@ export default function Login() {
         {apiError && (
           <div
             role="alert"
-            className="mb-5 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 p-3.5 text-sm text-red-700 dark:border-red-400/20 dark:bg-red-500/10 dark:text-red-300"
+            className="
+              mb-5 flex items-start gap-2
+              rounded-xl border border-red-200
+              bg-red-50 p-3.5 text-sm text-red-700
+              dark:border-red-400/20
+              dark:bg-red-500/10
+              dark:text-red-300
+            "
           >
             <span aria-hidden="true">ⓘ</span>
             <p>{apiError}</p>
@@ -114,7 +148,16 @@ export default function Login() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="vybe-primary w-full rounded-2xl bg-gradient-to-r from-[#8B5CF6] to-[#6950E8] px-4 py-3.5 font-bold text-white shadow-[0_8px_24px_rgba(139,92,246,.2)] transition-all duration-200 hover:-translate-y-0.5 hover:from-[#7C3AED] hover:to-[#5B43D6] disabled:cursor-not-allowed disabled:opacity-60"
+          className="
+            w-full rounded-2xl
+            bg-gradient-to-r from-[#8B5CF6] to-[#6950E8]
+            px-4 py-3.5 font-bold text-white
+            shadow-[0_8px_24px_rgba(139,92,246,0.2)]
+            transition-all duration-200
+            hover:-translate-y-0.5
+            hover:from-[#7C3AED] hover:to-[#5B43D6]
+            disabled:cursor-not-allowed disabled:opacity-60
+          "
         >
           {isSubmitting ? "Signing in..." : "Login"}
         </button>
