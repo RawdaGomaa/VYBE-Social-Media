@@ -1,0 +1,386 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+  --color-vybe-50: #F7F5FF;
+  --color-vybe-100: #EDE7FF;
+  --color-vybe-300: #C4B5FD;
+  --color-vybe-500: #8B5CF6;
+  --color-vybe-700: #6D28D9;
+  --color-vybe-950: #15162B;
+}
+
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+:root {
+  font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #24203B;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: inherit;
+
+  /* Smooth continuous background */
+  background-color: #F8F7FE;
+  background-image:
+    radial-gradient(
+      ellipse 65% 55% at 5% 5%,
+      rgba(168, 139, 250, .20),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 100% 45%,
+      rgba(196, 181, 253, .22),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 50% 100%,
+      rgba(139, 92, 246, .10),
+      transparent 75%
+    );
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  transition: 160ms ease;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: #C4B5FD;
+  color: #15162B;
+}
+
+/* =========================
+   AUTHENTICATION
+========================= */
+
+.vybe-auth {
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+}
+
+/* Removed the limited-height pseudo background
+   to prevent the horizontal gradient cutoff. */
+
+.vybe-auth-card {
+  position: relative;
+}
+
+.vybe-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #E9DFFF;
+  background: #F2ECFF;
+  color: #8050D5;
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.vybe-input {
+  transition: border-color .18s, box-shadow .18s;
+}
+
+.vybe-input:focus {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, .11);
+}
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+
+.vybe-primary {
+  background: linear-gradient(120deg, #8B5CF6, #6653E8);
+  box-shadow: 0 9px 24px rgba(139, 92, 246, .22);
+}
+
+.vybe-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(139, 92, 246, .3);
+}
+
+/* =========================
+   SHARED PANELS
+========================= */
+
+main .rounded-3xl.bg-white,
+main .rounded-2xl.bg-white {
+  border: 1px solid #EEE9FA;
+  box-shadow: 0 12px 35px rgba(39, 29, 90, .045);
+}
+
+main textarea:focus,
+main input:focus,
+main select:focus {
+  outline-color: #8B5CF6;
+}
+
+/* =========================
+   PREMIUM DASHBOARD
+========================= */
+
+.premium-panel {
+  border: 1px solid #eeeaf7;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 12px 40px rgba(48, 30, 102, .055);
+}
+
+.premium-panel a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* =========================
+   THEME TOGGLE
+========================= */
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  border: 1px solid #e6dffa;
+  background: #f4efff;
+  color: #7145d0;
+}
+
+.theme-toggle:hover {
+  background: #e8deff;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   WORDMARK
+========================= */
+
+.vybe-wordmark {
+  color: #211940;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #f3efff;
+}
+
+:root[data-theme="dark"] body {
+  background-color: #101120;
+
+  background-image:
+    radial-gradient(
+      ellipse 65% 55% at 5% 5%,
+      rgba(114, 76, 212, .19),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 100% 45%,
+      rgba(131, 102, 225, .13),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 50% 100%,
+      rgba(139, 92, 246, .09),
+      transparent 75%
+    );
+
+  color: #f1ecff;
+}
+
+:root[data-theme="dark"] .premium-panel,
+:root[data-theme="dark"] main [class*="bg-white"],
+:root[data-theme="dark"] nav[class*="bg-white"],
+:root[data-theme="dark"] main [class*="bg-gray-50"] {
+  background-color: #1b1c32 !important;
+  border-color: #353452 !important;
+  color: #f1ecff;
+}
+
+:root[data-theme="dark"] main [class*="bg-gray-100"],
+:root[data-theme="dark"] main [class*="bg-slate-50"],
+:root[data-theme="dark"] main [class*="bg-[#f7"],
+:root[data-theme="dark"] main [class*="bg-[#F2"] {
+  background-color: #262741 !important;
+}
+
+:root[data-theme="dark"] main [class*="text-gray-900"],
+:root[data-theme="dark"] main [class*="text-gray-800"],
+:root[data-theme="dark"] main [class*="text-gray-700"],
+:root[data-theme="dark"] main [class*="text-[#1815"],
+:root[data-theme="dark"] main [class*="text-[#2820"] {
+  color: #f2edff !important;
+}
+
+:root[data-theme="dark"] main [class*="text-gray-600"],
+:root[data-theme="dark"] main [class*="text-gray-500"],
+:root[data-theme="dark"] main [class*="text-gray-400"] {
+  color: #aaa7c4 !important;
+}
+
+:root[data-theme="dark"] main [class*="border-gray-"],
+:root[data-theme="dark"] nav[class*="border-violet"] {
+  border-color: #383651 !important;
+}
+
+:root[data-theme="dark"] main input,
+:root[data-theme="dark"] main textarea,
+:root[data-theme="dark"] main select {
+  color: #f4f0ff;
+  background-color: #24263f;
+  border-color: #45415e;
+}
+
+:root[data-theme="dark"] main input::placeholder,
+:root[data-theme="dark"] main textarea::placeholder {
+  color: #9995b0;
+}
+
+:root[data-theme="dark"] .vybe-pill {
+  border-color: #534080;
+  background: #34294e;
+  color: #d5beff;
+}
+
+:root[data-theme="dark"] .theme-toggle {
+  background: #28223e;
+  color: #e5cfff;
+  border-color: #54456d;
+}
+
+:root[data-theme="dark"] .theme-toggle:hover {
+  background: #42315c;
+}
+
+:root[data-theme="dark"] .vybe-wordmark {
+  color: #f7f2ff;
+}
+
+:root[data-theme="dark"] main [class*="bg-red-50"],
+:root[data-theme="dark"] main [class*="bg-green-50"] {
+  background-color: #30283c !important;
+}
+
+:root[data-theme="dark"] main a:hover,
+:root[data-theme="dark"] main button:hover {
+  filter: brightness(1.08);
+}
+
+/* =========================
+   DASHBOARD SCROLL
+========================= */
+
+@media (min-width: 1024px) {
+
+  .vybe-dashboard-scroll {
+    height: calc(100dvh - 64px);
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 16px;
+    padding-bottom: 0;
+    align-items: stretch;
+  }
+
+  .vybe-dashboard-scroll > .vybe-scroll-column {
+    min-height: 0;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    padding-bottom: 26px;
+  }
+
+  .vybe-dashboard-scroll > .vybe-scroll-column:hover,
+  .vybe-dashboard-scroll > .vybe-scroll-column:focus-within {
+    scrollbar-color: #ada8bc transparent;
+  }
+
+  .vybe-dashboard-scroll > .vybe-scroll-column::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .vybe-dashboard-scroll > .vybe-scroll-column::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .vybe-dashboard-scroll > .vybe-scroll-column::-webkit-scrollbar-thumb {
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-clip: padding-box;
+  }
+
+  .vybe-dashboard-scroll > .vybe-scroll-column:hover::-webkit-scrollbar-thumb,
+  .vybe-dashboard-scroll > .vybe-scroll-column:focus-within::-webkit-scrollbar-thumb {
+    background-color: #ada8bc;
+  }
+
+  :root[data-theme="dark"] .vybe-dashboard-scroll > .vybe-scroll-column:hover,
+  :root[data-theme="dark"] .vybe-dashboard-scroll > .vybe-scroll-column:focus-within {
+    scrollbar-color: #6f6989 transparent;
+  }
+
+  :root[data-theme="dark"] .vybe-dashboard-scroll > .vybe-scroll-column:hover::-webkit-scrollbar-thumb,
+  :root[data-theme="dark"] .vybe-dashboard-scroll > .vybe-scroll-column:focus-within::-webkit-scrollbar-thumb {
+    background-color: #6f6989;
+  }
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
