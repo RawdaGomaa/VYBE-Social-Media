@@ -65,9 +65,8 @@ export default function Login() {
       className="
         relative isolate flex min-h-[calc(100dvh-80px)]
         w-full items-center justify-center
-        overflow-hidden px-4 py-10 sm:px-6
-        bg-[radial-gradient(ellipse_at_5%_5%,rgba(168,139,250,0.20),transparent_55%),radial-gradient(ellipse_at_100%_55%,rgba(196,181,253,0.22),transparent_60%),linear-gradient(180deg,#F8F7FE,#F0EAFE)]
-        dark:bg-[radial-gradient(ellipse_at_5%_5%,rgba(114,76,212,0.19),transparent_55%),radial-gradient(ellipse_at_100%_55%,rgba(131,102,225,0.13),transparent_60%),linear-gradient(180deg,#101120,#211A38)]
+        overflow-hidden bg-transparent
+        px-4 py-10 sm:px-6
       "
     >
       <form
