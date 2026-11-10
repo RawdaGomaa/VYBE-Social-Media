@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import { Link, Navigate, useNavigate } from "react-router";
 import { z } from "zod";
 import { useAuth } from "../../context/AuthContext";
+import { getApiError } from "../../lib/api";
 import { useState } from "react";
 
 const schema = z.object({
-  login: z.string().trim().min(3, "Enter your email or username"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  login: z.string().trim().min(3, "Please enter your email or username."),
+  password: z.string().min(8, "Password must be at least 8 characters."),
 });
 
 type LoginForm = z.infer<typeof schema>;
@@ -37,11 +38,7 @@ export default function Login() {
       await login(values.login, values.password);
       navigate("/posts");
     } catch (error) {
-      setApiError(
-        error instanceof Error
-          ? error.message
-          : "Unable to login. Please try again."
-      );
+      setApiError(getApiError(error));
     }
   };
 
@@ -83,7 +80,9 @@ export default function Login() {
         </label>
 
         <input
-          {...register("login")}
+          {...register("login", {
+            onChange: () => setApiError(""),
+          })}
           type="text"
           autoComplete="username"
           className={inputClassName}
@@ -99,7 +98,9 @@ export default function Login() {
         </label>
 
         <input
-          {...register("password")}
+          {...register("password", {
+            onChange: () => setApiError(""),
+          })}
           type="password"
           autoComplete="current-password"
           className={inputClassName}
