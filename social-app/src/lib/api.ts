@@ -10,6 +10,7 @@ export const api = axios.create({
   },
 });
 
+// Attach authentication token to requests.
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
@@ -20,6 +21,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Check canceled requests.
 export function isRequestCanceled(error: unknown): boolean {
   return (
     axios.isCancel(error) ||
@@ -27,20 +29,19 @@ export function isRequestCanceled(error: unknown): boolean {
   );
 }
 
-// Safely extract messages from different API response formats.
+// Safely extract messages from API responses.
 function extractMessages(value: unknown): string[] {
   if (typeof value === "string") {
     return value.trim() ? [value.trim()] : [];
   }
 
   if (Array.isArray(value)) {
-    return value.flatMap(extractMessages);
+    return value.flatMap((item) => extractMessages(item));
   }
 
   if (value && typeof value === "object") {
     const obj = value as Record<string, unknown>;
 
-    // Prefer common message fields.
     if (typeof obj.message === "string") {
       return extractMessages(obj.message);
     }
@@ -49,12 +50,15 @@ function extractMessages(value: unknown): string[] {
       return extractMessages(obj.msg);
     }
 
-    return Object.values(obj).flatMap(extractMessages);
+    return Object.values(obj).flatMap((item) =>
+      extractMessages(item)
+    );
   }
 
   return [];
 }
 
+// Get clean and user-friendly API error messages.
 export function getApiError(error: unknown): string {
   if (axios.isAxiosError(error)) {
     const data = error.response?.data as
@@ -64,6 +68,27 @@ export function getApiError(error: unknown): string {
         }
       | undefined;
 
+    const status = error.response?.status;
+
+    // Detect technical password validation errors.
+    const rawResponse = JSON.stringify(data ?? "").toLowerCase();
+
+    if (
+      rawResponse.includes("password") &&
+      (
+        rawResponse.includes("required pattern") ||
+        rawResponse.includes("fails to match") ||
+        rawResponse.includes("regex")
+      )
+    ) {
+      return "Invalid password format. Please check your password requirements.";
+    }
+
+    // Handle incorrect login credentials.
+    if (status === 401) {
+      return "Incorrect email or password. Please try again.";
+    }
+
     // Handle validation errors.
     const validationErrors = extractMessages(data?.errors);
 
@@ -71,22 +96,16 @@ export function getApiError(error: unknown): string {
       return [...new Set(validationErrors)].join(" - ");
     }
 
-    // Handle API messages.
+    // Handle normal API messages.
     const messages = extractMessages(data?.message);
 
     if (messages.length > 0) {
       return [...new Set(messages)].join(" - ");
     }
 
-    // Handle HTTP status codes safely.
-    const status = error.response?.status;
-
+    // Handle HTTP status codes.
     if (status === 400) {
       return "Invalid request. Please check your information.";
-    }
-
-    if (status === 401) {
-      return "Invalid email or password. Please try again.";
     }
 
     if (status === 403) {
@@ -94,22 +113,22 @@ export function getApiError(error: unknown): string {
     }
 
     if (status === 404) {
-      return "The requested resource was not found.";
+      return "Account not found. Please check your details.";
     }
 
     if (status === 422) {
-      return "Please check your submitted information.";
+      return "Invalid information. Please check your input.";
     }
 
     if (status !== undefined && status >= 500) {
-      return "Server error. Please try again later.";
+      return "Something went wrong on our server. Please try again later.";
     }
 
     if (error.code === "ERR_NETWORK") {
-      return "Network error. Please check your internet connection.";
+      return "Connection failed. Please check your internet connection.";
     }
 
-    return error.message || "Request failed. Please try again.";
+    return "Unable to complete your request. Please try again.";
   }
 
   if (error instanceof Error) {
@@ -119,6 +138,7 @@ export function getApiError(error: unknown): string {
   return "Something went wrong. Please try again.";
 }
 
+// Extract data from API responses.
 export function unwrapData<T>(payload: unknown): T {
   if (
     payload !== null &&
@@ -126,6 +146,7 @@ export function unwrapData<T>(payload: unknown): T {
     "data" in payload
   ) {
     const response = payload as { data?: T };
+
     return (response.data ?? payload) as T;
   }
 
