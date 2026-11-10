@@ -42,36 +42,72 @@ export default function Login() {
     }
   };
 
-  const inputClassName =
-    "w-full rounded-2xl border border-violet-200/80 bg-white/70 px-4 py-4 text-sm font-medium text-[#211936] placeholder:text-[#958BAA] outline-none transition-all duration-300 hover:border-violet-300 focus:border-violet-500 focus:bg-white focus:ring-4 focus:ring-violet-500/15 dark:border-[#51416F] dark:bg-[#25213A]/80 dark:text-[#F5F0FF] dark:placeholder:text-[#AAA0BE] dark:hover:border-violet-400 dark:focus:border-violet-400 dark:focus:bg-[#29243F] dark:focus:ring-violet-400/15";
+  const inputClassName = `
+    w-full rounded-2xl border border-[#DDD0FF]
+    bg-white/80 px-4 py-3.5
+    text-sm font-medium text-[#211936]
+    placeholder:text-[#958BAA]
+    outline-none transition-all duration-200
+    hover:border-violet-300
+    focus:border-[#8B5CF6]
+    focus:bg-white
+    focus:ring-4 focus:ring-[#8B5CF6]/10
+    dark:border-[#51416F]
+    dark:bg-[#25213A]
+    dark:text-[#F5F0FF]
+    dark:placeholder:text-[#AAA0BE]
+    dark:focus:border-[#A78BFA]
+    dark:focus:bg-[#292540]
+  `;
 
   return (
-    <div className="relative isolate flex min-h-[calc(100dvh-80px)] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-[#F8F7FE] via-[#F3EEFF] to-[#EDE7FF] px-4 py-12 dark:from-[#101120] dark:via-[#17152B] dark:to-[#211A38]">
-
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute -left-32 -top-24 h-[420px] w-[420px] rounded-full bg-violet-400/20 blur-[120px] transition-opacity duration-700 dark:bg-violet-600/20" />
-
-      <div className="pointer-events-none absolute -right-32 top-1/4 h-[420px] w-[420px] rounded-full bg-purple-400/20 blur-[120px] dark:bg-purple-600/20" />
-
-      <div className="pointer-events-none absolute -bottom-40 left-1/3 h-[380px] w-[380px] rounded-full bg-indigo-400/15 blur-[110px] dark:bg-indigo-600/15" />
-
-      {/* Login Card */}
+    <div
+      className="
+        relative isolate flex min-h-[calc(100dvh-80px)]
+        w-full items-center justify-center
+        overflow-hidden px-4 py-10 sm:px-6
+        bg-[radial-gradient(ellipse_at_5%_5%,rgba(168,139,250,0.20),transparent_55%),radial-gradient(ellipse_at_100%_55%,rgba(196,181,253,0.22),transparent_60%),linear-gradient(180deg,#F8F7FE,#F0EAFE)]
+        dark:bg-[radial-gradient(ellipse_at_5%_5%,rgba(114,76,212,0.19),transparent_55%),radial-gradient(ellipse_at_100%_55%,rgba(131,102,225,0.13),transparent_60%),linear-gradient(180deg,#101120,#211A38)]
+      "
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="relative z-10 w-full max-w-md overflow-hidden rounded-[2rem] border border-white/80 bg-white/75 p-8 shadow-[0_25px_80px_rgba(91,61,160,0.12)] backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(139,92,246,0.20)] sm:p-10 dark:border-white/10 dark:bg-[#1C1B32]/80 dark:shadow-[0_25px_80px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_30px_90px_rgba(139,92,246,0.15)]"
+        className="
+          relative z-10 w-full max-w-md
+          rounded-[2rem] border border-white/80
+          bg-white/90 p-7
+          shadow-[0_24px_80px_rgba(68,46,125,0.12)]
+          backdrop-blur-xl
+          transition-all duration-300
+          hover:shadow-[0_28px_85px_rgba(139,92,246,0.18)]
+          sm:p-10
+          dark:border-[#38304F]
+          dark:bg-[#1C1B32]/95
+          dark:shadow-[0_24px_80px_rgba(0,0,0,0.30)]
+          dark:hover:shadow-[0_28px_85px_rgba(139,92,246,0.15)]
+        "
       >
-        {/* Card Glow */}
-        <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet-400/10 blur-3xl dark:bg-violet-500/10" />
-
-        <div className="relative mb-9 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-200 bg-violet-50/90 px-4 py-2 text-xs font-bold text-violet-700 shadow-sm transition-all duration-300 hover:scale-105 dark:border-violet-400/20 dark:bg-violet-500/10 dark:text-violet-300">
-            <span className="text-violet-500">✦</span>
+        {/* HEADER */}
+        <div className="mb-9 text-center">
+          <span
+            className="
+              inline-flex items-center gap-2 rounded-full
+              border border-[#E9DFFF]
+              bg-[#F2ECFF] px-4 py-2
+              text-xs font-bold text-[#8050D5]
+              shadow-sm
+              dark:border-[#534080]
+              dark:bg-[#34294E]
+              dark:text-[#D5BEFF]
+            "
+          >
+            <span className="text-[#8B5CF6]">✦</span>
             Welcome to your space
           </span>
 
-          <h1 className="mt-6 text-4xl font-black tracking-tight text-[#18152C] dark:text-[#F5F0FF]">
+          <h1 className="mt-5 text-4xl font-black tracking-tight text-[#18152C] dark:text-[#F5F0FF]">
             Welcome{" "}
-            <span className="bg-gradient-to-r from-violet-500 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] bg-clip-text text-transparent">
               back!
             </span>
           </h1>
@@ -81,18 +117,25 @@ export default function Login() {
           </p>
         </div>
 
-        {/* API Error */}
+        {/* API ERROR */}
         {apiError && (
           <div
             role="alert"
-            className="mb-5 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50/90 p-3.5 text-sm text-red-700 dark:border-red-400/20 dark:bg-red-500/10 dark:text-red-300"
+            className="
+              mb-5 flex items-start gap-2
+              rounded-xl border border-red-200
+              bg-red-50 p-3.5 text-sm text-red-700
+              dark:border-red-400/20
+              dark:bg-red-500/10
+              dark:text-red-300
+            "
           >
             <span aria-hidden="true">ⓘ</span>
             <p>{apiError}</p>
           </div>
         )}
 
-        {/* Email */}
+        {/* EMAIL / USERNAME */}
         <div className="mb-5">
           <label className="mb-2 block text-sm font-semibold text-[#29243C] dark:text-[#E9E3F8]">
             Email or username
@@ -108,12 +151,12 @@ export default function Login() {
             placeholder="email@example.com or username"
           />
 
-          <p className="mt-1 min-h-5 text-xs text-red-500 dark:text-red-400">
+          <p className="mt-1.5 min-h-5 text-xs font-medium text-red-500 dark:text-red-400">
             {errors.login?.message}
           </p>
         </div>
 
-        {/* Password */}
+        {/* PASSWORD */}
         <div className="mb-7">
           <label className="mb-2 block text-sm font-semibold text-[#29243C] dark:text-[#E9E3F8]">
             Password
@@ -129,16 +172,28 @@ export default function Login() {
             placeholder="Your password"
           />
 
-          <p className="mt-1 min-h-5 text-xs text-red-500 dark:text-red-400">
+          <p className="mt-1.5 min-h-5 text-xs font-medium text-red-500 dark:text-red-400">
             {errors.password?.message}
           </p>
         </div>
 
-        {/* Login Button */}
+        {/* LOGIN BUTTON */}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-violet-500 via-purple-600 to-indigo-600 px-4 py-4 font-bold text-white shadow-[0_8px_25px_rgba(139,92,246,0.25)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_12px_35px_rgba(139,92,246,0.4)] active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+          className="
+            group relative w-full overflow-hidden
+            rounded-2xl
+            bg-gradient-to-r from-[#8B5CF6] to-[#6950E8]
+            px-4 py-3.5 font-bold text-white
+            shadow-[0_9px_24px_rgba(139,92,246,0.22)]
+            transition-all duration-200
+            hover:-translate-y-0.5
+            hover:shadow-[0_12px_28px_rgba(139,92,246,0.35)]
+            active:scale-[0.98]
+            disabled:cursor-not-allowed
+            disabled:opacity-60
+          "
         >
           <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
@@ -147,12 +202,19 @@ export default function Login() {
           </span>
         </button>
 
-        {/* Register Link */}
-        <p className="mt-7 text-center text-sm text-gray-500 dark:text-[#AAA4BD]">
+        {/* REGISTER LINK */}
+        <p className="mt-7 text-center text-sm text-[#89859A] dark:text-[#AAA4BD]">
           No account?{" "}
           <Link
             to="/register"
-            className="font-bold text-violet-600 transition-all duration-200 hover:text-violet-800 hover:underline dark:text-violet-400 dark:hover:text-violet-300"
+            className="
+              font-bold text-[#8B5CF6]
+              transition-colors
+              hover:text-[#6D28D9]
+              hover:underline
+              dark:text-[#B69AFF]
+              dark:hover:text-[#D5BEFF]
+            "
           >
             Register
           </Link>
