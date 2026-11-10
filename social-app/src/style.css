@@ -384,3 +384,39 @@ button:focus-visible {
     animation: none !important;
   }
 }
+/* Remove unwanted outer spacing */
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Full viewport background */
+html {
+  background: #f8f7fe;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse 55% 45% at 10% 0%,
+      rgba(168, 139, 250, 0.14),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 45% 35% at 100% 18%,
+      rgba(131, 102, 225, 0.10),
+      transparent 65%
+    ),
+    #f8f7fe !important;
+}
+
+#root {
+  max-width: none !important;
+}
