@@ -78,7 +78,7 @@ export default function Settings() {
       </section>
 
       {/* Password Card */}
-      <section className="premium-panel overflow-hidden rounded-3xl border border-[#EAE3F7] bg-white shadow-[0_8px_30px_rgba(70,45,120,0.06)] dark:border-[#383651]">
+      <section className="premium-panel overflow-hidden">
 
         <div className="border-b border-[#EAE3F7] p-5 sm:p-7 dark:border-[#383651]">
           <div className="flex min-w-0 items-center gap-4">
@@ -115,7 +115,7 @@ export default function Settings() {
 
         <form
           onSubmit={handleSubmit(submit)}
-          className="space-y-5 bg-white p-5 sm:p-7 dark:bg-transparent"
+          className="space-y-5 p-5 sm:p-7"
         >
 
           {/* Error */}
