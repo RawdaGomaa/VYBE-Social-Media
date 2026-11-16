@@ -27,6 +27,7 @@ const POSTS_STALE_TIME = 90_000;
 export default function Posts() {
   const [only, setOnly] = useState<FeedTab>("all");
   const { user } = useAuth();
+  const userPhoto = user?.photo || user?.profilePhoto || user?.image;
 
   const {
     body,
@@ -97,13 +98,15 @@ export default function Posts() {
 
   return (
     <div
-      className="
-        relative isolate mx-auto grid w-full max-w-[1410px]
-        grid-cols-1 items-start gap-6
-        pb-16 pt-8
-        lg:grid-cols-[225px_minmax(0,1fr)]
-        xl:grid-cols-[225px_minmax(0,1fr)_280px]
-      "
+     className="
+  relative isolate mx-auto grid w-full max-w-[1410px]
+  grid-cols-1 items-start gap-6
+  px-4 pb-16 pt-8
+  sm:px-6
+  lg:px-0
+  lg:grid-cols-[225px_minmax(0,1fr)]
+  xl:grid-cols-[225px_minmax(0,1fr)_280px]
+"
     >
       {/* BACKGROUND GLOW */}
       <div className="pointer-events-none fixed -left-32 top-32 -z-10 h-80 w-80 rounded-full bg-violet-400/10 blur-[120px] dark:bg-violet-600/10" />
@@ -114,20 +117,44 @@ export default function Posts() {
       <aside className="hidden space-y-4 lg:block">
         <div className={`${cardClass} overflow-hidden p-4`}>
           {/* USER INFO */}
-          <div className="mb-6 flex items-center gap-3 rounded-2xl bg-gradient-to-br from-[#261e4c] via-[#49317f] to-[#8B5CF6] p-4 text-white shadow-lg shadow-violet-900/10">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/20 bg-white/20 text-lg font-black">
-              {(user?.name?.[0] || "V").toUpperCase()}
-            </span>
+         
+{/* USER INFO */}
+<Link
+  to="/profile"
+  className="
+    mb-6 flex items-center gap-3 rounded-2xl
+    bg-gradient-to-br from-[#261e4c] via-[#49317f] to-[#8B5CF6]
+    p-4 text-white shadow-lg shadow-violet-900/10
+    transition-all duration-200
+    hover:-translate-y-0.5 hover:shadow-xl
+    focus-visible:outline-none focus-visible:ring-2
+    focus-visible:ring-violet-400 focus-visible:ring-offset-2
+    dark:focus-visible:ring-offset-[#1C1B32]
+  "
+>
+  <div className="h-11 w-11 shrink-0 overflow-hidden rounded-2xl border border-white/20 bg-white/20">
+    {userPhoto ? (
+      <img
+        src={userPhoto}
+        alt={user?.name || "Profile"}
+        className="h-full w-full object-cover"
+      />
+    ) : (
+      <span className="grid h-full w-full place-items-center text-lg font-black">
+        {(user?.name?.[0] || "V").toUpperCase()}
+      </span>
+    )}
+  </div>
 
-            <div className="min-w-0">
-              <p className="truncate text-sm font-extrabold">
-                {user?.name || "Welcome back"}
-              </p>
-              <p className="truncate text-xs text-white/70">
-                Your creative space
-              </p>
-            </div>
-          </div>
+  <div className="min-w-0">
+    <p className="truncate text-sm font-extrabold">
+      {user?.name || "Welcome back"}
+    </p>
+    <p className="truncate text-xs text-white/70">
+      Your creative space
+    </p>
+  </div>
+</Link>
 
           <p className="mb-3 px-3 text-[11px] font-extrabold uppercase tracking-[.2em] text-[#AAA4BA] dark:text-[#8982A4]">
             Your space
@@ -199,8 +226,18 @@ export default function Posts() {
           className={`${cardClass} overflow-hidden p-4 sm:p-5`}
         >
           <div className="mb-4 flex items-center gap-3">
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-sm font-black text-white shadow-md shadow-violet-500/20">
-              {(user?.name?.[0] || "V").toUpperCase()}
+            <div className="h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md shadow-violet-500/20">
+              {userPhoto ? (
+                <img
+                  src={userPhoto}
+                  alt={user?.name || "Profile"}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="grid h-full w-full place-items-center text-sm font-black">
+                  {(user?.name?.[0] || "V").toUpperCase()}
+                </span>
+              )}
             </div>
 
             <div>
@@ -494,9 +531,7 @@ export default function Posts() {
               hover:-translate-y-0.5 hover:shadow-md
               dark:from-violet-500/20 dark:to-purple-500/10
               dark:text-violet-300
-              dark:hover:from-violet-500/30 dark:hover:to-purple-500/20
-            "
-          >
+              dark:hover:from-violet-500/30 dark:hover:to-purple-500/20" >
             Explore community →
           </Link>
         </section>

@@ -84,7 +84,7 @@ export default function Settings() {
         <div className="border-b border-[#EAE3F7] p-5 sm:p-7 dark:border-[#383651]">
           <div className="flex min-w-0 items-center gap-4">
 
-            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#F0E9FF] text-[#8B5CF6] dark:bg-[#34294E]">
+            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#E4D8FF] text-[#8B5CF6] dark:bg-[#34294E]">
               <svg
                 width="27"
                 height="27"
