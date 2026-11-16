@@ -39,10 +39,13 @@ export default function NavBar() {
       window.removeEventListener("notifications:changed", refreshUnread);
   }, [token]);
 
-  // Navigation link styles
+  // Navigation styles
+  // Mobile: compact
+  // Desktop: original sizing and spacing
   const nav = ({ isActive }: { isActive: boolean }) =>
-    `group flex min-w-0 items-center justify-center gap-1 sm:gap-2
-    rounded-xl px-1 sm:px-3 py-2 sm:py-2.5
+    `group flex shrink-0 items-center justify-center
+    gap-1 sm:gap-2
+    rounded-xl px-1.5 sm:px-3 py-2 sm:py-2.5
     text-xs sm:text-sm font-semibold transition-all duration-200
     ${
       isActive
@@ -50,9 +53,12 @@ export default function NavBar() {
         : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
     }`;
 
-  // Mobile navigation links
+  // Equal navigation items on mobile only
+  // Restore original compact centered links on desktop
   const mobileNav = ({ isActive }: { isActive: boolean }) =>
-    `${nav({ isActive })} flex-1 basis-0 sm:flex-none sm:basis-auto`;
+    `${nav({ isActive })}
+    flex-1 basis-0 min-w-0
+    sm:flex-none sm:basis-auto sm:shrink-0`;
 
   const photo =
     profilePhotoPreview ??
@@ -60,9 +66,8 @@ export default function NavBar() {
     user?.profilePhoto ??
     user?.image;
 
-  // Theme button
   const iconButtonClass =
-    "grid h-9 w-9 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
+    "grid h-8 w-8 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
 
   return (
     <nav
@@ -81,8 +86,8 @@ export default function NavBar() {
         className="
           mx-auto grid w-full max-w-7xl
           grid-cols-[auto_minmax(0,1fr)_auto]
-          items-center gap-1
-          px-2 py-2.5
+          items-center gap-1 px-2 py-2.5
+          sm:grid-cols-[auto_1fr_auto]
           sm:gap-4 sm:px-5
           lg:px-6
         "
@@ -90,7 +95,7 @@ export default function NavBar() {
         {/* BRAND LOGO */}
         <Link
           to={token ? "/posts" : "/login"}
-          className="flex min-w-0 shrink-0 items-center justify-self-start"
+          className="flex shrink-0 items-center justify-self-start"
         >
           <BrandLogo />
         </Link>
@@ -100,8 +105,9 @@ export default function NavBar() {
             {/* NAVIGATION LINKS */}
             <div
               className="
-                flex min-w-0 items-center justify-evenly
+                flex min-w-0 items-center justify-center
                 gap-0 overflow-visible
+                sm:gap-1
               "
             >
               <NavLink
@@ -165,7 +171,7 @@ export default function NavBar() {
             <div
               className="
                 flex shrink-0 items-center justify-end
-                gap-0.5 sm:gap-2
+                gap-0 sm:gap-2
               "
             >
               {/* THEME TOGGLE */}
@@ -212,18 +218,9 @@ export default function NavBar() {
               {/* SETTINGS */}
               <NavLink
                 to="/settings"
+                className={nav}
                 title="Settings"
                 aria-label="Settings"
-                className={({ isActive }) =>
-                  `grid h-9 w-9 sm:h-10 sm:w-10 shrink-0
-                  place-items-center rounded-xl
-                  transition-all duration-200
-                  ${
-                    isActive
-                      ? "bg-gradient-to-r from-violet-100 to-purple-100 text-violet-700 shadow-sm dark:from-violet-500/20 dark:to-purple-500/20 dark:text-violet-300"
-                      : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
-                  }`
-                }
               >
                 <Setting2 size="19" />
               </NavLink>
