@@ -72,7 +72,7 @@ export default function Settings() {
           Account <span className="text-[#8B5CF6]">Settings</span>
         </h1>
 
-        <p className="mt-2 text-sm leading-relaxed text-[#746B88] dark:text-[#AAA4BD]">
+        <p className="mt-2 text-sm leading-relaxed !text-[#62566F] dark:!text-[#AAA4BD]">
           Manage your security and keep your account protected.
         </p>
       </section>
@@ -80,6 +80,7 @@ export default function Settings() {
       {/* Password Card */}
       <section className="premium-panel overflow-hidden">
 
+        {/* Card Header */}
         <div className="border-b border-[#EAE3F7] p-5 sm:p-7 dark:border-[#383651]">
           <div className="flex min-w-0 items-center gap-4">
 
@@ -101,11 +102,11 @@ export default function Settings() {
             </div>
 
             <div className="min-w-0">
-              <h2 className="text-lg font-extrabold text-[#282040] dark:text-[#F1ECFF]">
+              <h2 className="!text-[#282040] text-lg font-extrabold dark:!text-[#F1ECFF]">
                 Change password
               </h2>
 
-              <p className="mt-1 text-xs leading-relaxed text-[#817791] dark:text-[#AAA4BD]">
+              <p className="mt-1 text-xs leading-relaxed !text-[#695D78] dark:!text-[#AAA4BD]">
                 Update your password to keep your account secure.
               </p>
             </div>
@@ -141,11 +142,11 @@ export default function Settings() {
           )}
 
           <div>
-            <h3 className="mb-1 text-sm font-extrabold text-[#282040] dark:text-[#F1ECFF]">
+            <h3 className="mb-1 text-sm font-extrabold !text-[#282040] dark:!text-[#F1ECFF]">
               Security information
             </h3>
 
-            <p className="mb-5 text-xs leading-relaxed text-[#817791] dark:text-[#AAA4BD]">
+            <p className="mb-5 text-xs leading-relaxed !text-[#695D78] dark:!text-[#AAA4BD]">
               Enter your current password before choosing a new one.
             </p>
 
@@ -193,7 +194,7 @@ export default function Settings() {
 
           {/* Password Requirements */}
           <div className="rounded-2xl border border-[#E5D9FA] bg-[#F8F5FF] p-4 dark:border-[#51416F] dark:bg-[#242039]">
-            <p className="mb-3 text-xs font-extrabold text-[#493765] dark:text-[#E5DCFA]">
+            <p className="mb-3 text-xs font-extrabold !text-[#493765] dark:!text-[#E5DCFA]">
               Password requirements
             </p>
 
@@ -206,7 +207,7 @@ export default function Settings() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex min-w-0 items-center gap-2 text-xs font-medium text-[#75698B] dark:text-[#AAA4BD]"
+                  className="flex min-w-0 items-center gap-2 text-xs font-medium !text-[#62566F] dark:!text-[#AAA4BD]"
                 >
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#8B5CF6]" />
                   {item}
@@ -233,11 +234,11 @@ export default function Settings() {
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
 
           <div className="min-w-0">
-            <h3 className="font-extrabold text-[#282040] dark:text-[#F1ECFF]">
+            <h3 className="font-extrabold !text-[#282040] dark:!text-[#F1ECFF]">
               Sign out
             </h3>
 
-            <p className="mt-1 text-xs leading-relaxed text-[#817791] dark:text-[#AAA4BD]">
+            <p className="mt-1 text-xs leading-relaxed !text-[#695D78] dark:!text-[#AAA4BD]">
               Sign out of your VYBE account on this device.
             </p>
           </div>
@@ -253,7 +254,7 @@ export default function Settings() {
         </div>
       </section>
 
-      <p className="mt-6 text-center text-xs text-[#827A91] dark:text-[#77738F]">
+      <p className="mt-6 text-center text-xs !text-[#695D78] dark:!text-[#77738F]">
         VYBE · Good things start with a conversation.
       </p>
 
@@ -272,7 +273,7 @@ function Input({
 }) {
   return (
     <label className="mb-4 block min-w-0">
-      <span className="mb-2 block text-sm font-semibold text-[#29243C] dark:text-[#E9E3F8]">
+      <span className="mb-2 block text-sm font-semibold !text-[#29243C] dark:!text-[#E9E3F8]">
         {label}
       </span>
 
