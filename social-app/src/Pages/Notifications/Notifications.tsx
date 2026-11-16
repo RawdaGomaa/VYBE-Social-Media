@@ -197,11 +197,11 @@ export default function Notifications() {
         {/* Panel Header */}
         <div className="mb-5 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h2 className="text-lg font-extrabold text-[#241633] dark:text-[#F1ECFF]">
+            <h2 className="!text-[#8B5CF6] text-lg font-extrabold dark:!text-[#F1ECFF]">
               Recent activity
             </h2>
 
-            <p className="mt-1 text-xs leading-relaxed text-[#695D78] dark:text-[#AAA4BD]">
+            <p className="mt-1 text-xs leading-relaxed !text-[#695D78] dark:!text-[#AAA4BD]">
               Your latest updates and interactions.
             </p>
           </div>
@@ -213,7 +213,6 @@ export default function Notifications() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#DCCBF8] bg-[#F4EEFF] px-3.5 py-2.5 text-xs font-bold text-[#7142C2] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C9B2F0] hover:bg-[#EDE3FF] hover:shadow-sm disabled:cursor-not-allowed disabled:border-[#DED5E8] disabled:bg-[#F1EDF6] disabled:text-[#756B80] disabled:opacity-100 dark:border-[#594477] dark:bg-[#34294E] dark:text-[#D5BEFF] dark:hover:bg-[#42315C] dark:disabled:opacity-40 sm:w-auto"
           >
             <TickCircle size="17" />
-
             {markingAll ? "Marking..." : "Mark all as read"}
           </button>
         </div>
@@ -322,15 +321,17 @@ export default function Notifications() {
 
                   {/* Content */}
                   <div className="min-w-0 flex-1">
-                    <p className={`break-words text-sm leading-6 ${
-                      unread
-                        ? "font-bold text-[#241633] dark:text-[#F1ECFF]"
-                        : "font-medium text-[#5D526D] dark:text-[#C4BED8]"
-                    }`}>
+                    <p
+                      className={`break-words text-sm leading-6 ${
+                        unread
+                          ? "!font-bold !text-[#241633] dark:!text-[#F1ECFF]"
+                          : "!font-medium !text-[#5D526D] dark:!text-[#C4BED8]"
+                      }`}
+                    >
                       {notificationText(item)}
                     </p>
 
-                    <p className="mt-1.5 break-words text-xs text-[#695D78] dark:text-[#8984A3]">
+                    <p className="mt-1.5 break-words text-xs !text-[#695D78] dark:!text-[#8984A3]">
                       {item.createdAt
                         ? new Date(item.createdAt).toLocaleString()
                         : ""}
@@ -386,13 +387,13 @@ export default function Notifications() {
                   <Notification size="32" />
                 </div>
 
-                <h3 className="text-lg font-extrabold text-[#241633] dark:text-[#F1ECFF]">
+                <h3 className="!text-[#8B5CF6] text-lg font-extrabold dark:!text-[#F1ECFF]">
                   {onlyUnread
                     ? "You're all caught up!"
                     : "No notifications yet"}
                 </h3>
 
-                <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#62566F] dark:text-[#AAA4BD]">
+                <p className="mt-2 max-w-sm text-sm leading-relaxed !text-[#62566F] dark:!text-[#AAA4BD]">
                   {onlyUnread
                     ? "You have no unread notifications. Enjoy your day!"
                     : "When someone interacts with your account, you'll see it here."}
@@ -413,7 +414,7 @@ export default function Notifications() {
         )}
       </section>
 
-      <p className="mt-6 text-center text-xs text-[#695D78] dark:text-[#77738F]">
+      <p className="mt-6 text-center text-xs !text-[#695D78] dark:!text-[#77738F]">
         VYBE · Good things start with a conversation.
       </p>
 
