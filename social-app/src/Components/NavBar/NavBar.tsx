@@ -68,11 +68,11 @@ export default function NavBar() {
 
   // Theme button
   const iconButtonClass =
-    "grid h-8 w-8 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
+    "grid h-9 w-9 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
 
   // Settings button: same clickable dimensions as theme button
   const settingsClass = ({ isActive }: { isActive: boolean }) =>
-    `grid h-8 w-8 sm:h-10 sm:w-10 shrink-0
+    `grid h-9 w-9 sm:h-10 sm:w-10 shrink-0
     place-items-center rounded-xl
     transition-all duration-200
     ${
@@ -266,7 +266,7 @@ export default function NavBar() {
                     src={photo}
                     alt="Profile"
                     className="
-                      h-7 w-7 sm:h-9 sm:w-9
+                      h-8 w-8 sm:h-9 sm:w-9
                       rounded-full object-cover
                       ring-2 ring-white dark:ring-[#39304F]
                     "
