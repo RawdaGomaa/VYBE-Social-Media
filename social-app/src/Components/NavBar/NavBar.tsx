@@ -53,11 +53,11 @@ export default function NavBar() {
         : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
     }`;
 
-  // Equal-width mobile navigation items
-  const mobileNav = ({ isActive }: { isActive: boolean }) =>
-    `${nav({ isActive })}
-    flex-1 basis-0 min-w-0
-    sm:flex-none sm:basis-auto sm:shrink-0`;
+    const mobileNav = ({ isActive }: { isActive: boolean }) =>
+  `${nav({ isActive })}
+  h-9 w-9 shrink-0 p-0
+  sm:h-auto sm:w-auto sm:px-3 sm:py-2.5`;
+
 
   // Profile image
   const photo =
@@ -120,10 +120,8 @@ export default function NavBar() {
               className="
                 flex min-w-0 w-full
                 items-center justify-center
-                gap-0 overflow-hidden
-                sm:gap-1 sm:overflow-visible
-              "
-            >
+               gap-1.5 overflow-hidden
+               sm:gap-1 sm:overflow-visible">
               {/* HOME */}
               <NavLink
                 to="/posts"
