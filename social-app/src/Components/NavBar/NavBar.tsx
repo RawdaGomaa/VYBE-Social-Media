@@ -39,13 +39,20 @@ export default function NavBar() {
       window.removeEventListener("notifications:changed", refreshUnread);
   }, [token]);
 
+  // Navigation link styles
   const nav = ({ isActive }: { isActive: boolean }) =>
-    `group flex shrink-0 items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200
+    `group flex min-w-0 items-center justify-center gap-1 sm:gap-2
+    rounded-xl px-1 sm:px-3 py-2 sm:py-2.5
+    text-xs sm:text-sm font-semibold transition-all duration-200
     ${
       isActive
         ? "bg-gradient-to-r from-violet-100 to-purple-100 text-violet-700 shadow-sm dark:from-violet-500/20 dark:to-purple-500/20 dark:text-violet-300"
         : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
     }`;
+
+  // Mobile navigation links
+  const mobileNav = ({ isActive }: { isActive: boolean }) =>
+    `${nav({ isActive })} flex-1 basis-0 sm:flex-none sm:basis-auto`;
 
   const photo =
     profilePhotoPreview ??
@@ -53,8 +60,9 @@ export default function NavBar() {
     user?.profilePhoto ??
     user?.image;
 
+  // Theme button
   const iconButtonClass =
-    "grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
+    "grid h-9 w-9 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
 
   return (
     <nav
@@ -68,12 +76,21 @@ export default function NavBar() {
         dark:shadow-[0_8px_32px_rgba(0,0,0,0.25)]
       "
     >
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-2 px-3 py-2.5 sm:gap-4 sm:px-5 lg:px-6">
-
+      {/* MAIN NAVBAR CONTAINER */}
+      <div
+        className="
+          mx-auto grid w-full max-w-7xl
+          grid-cols-[auto_minmax(0,1fr)_auto]
+          items-center gap-1
+          px-2 py-2.5
+          sm:gap-4 sm:px-5
+          lg:px-6
+        "
+      >
         {/* BRAND LOGO */}
         <Link
           to={token ? "/posts" : "/login"}
-          className="flex shrink-0 items-center justify-self-start"
+          className="flex min-w-0 shrink-0 items-center justify-self-start"
         >
           <BrandLogo />
         </Link>
@@ -83,30 +100,40 @@ export default function NavBar() {
             {/* NAVIGATION LINKS */}
             <div
               className="
-                flex min-w-0 items-center justify-center gap-1
-                overflow-x-auto
-                [scrollbar-width:none]
-                [&::-webkit-scrollbar]:hidden
+                flex min-w-0 items-center justify-evenly
+                gap-0 overflow-visible
               "
             >
-              <NavLink to="/posts" className={nav} title="Home">
+              <NavLink
+                to="/posts"
+                className={mobileNav}
+                title="Home"
+              >
                 <Home2 size="19" />
                 <span className="hidden lg:inline">Home</span>
               </NavLink>
 
-              <NavLink to="/community" className={nav} title="Community">
+              <NavLink
+                to="/community"
+                className={mobileNav}
+                title="Community"
+              >
                 <People size="19" />
                 <span className="hidden lg:inline">Community</span>
               </NavLink>
 
-              <NavLink to="/bookmarks" className={nav} title="Saved posts">
+              <NavLink
+                to="/bookmarks"
+                className={mobileNav}
+                title="Saved posts"
+              >
                 <Bookmark size="19" />
                 <span className="hidden lg:inline">Saved</span>
               </NavLink>
 
               <NavLink
                 to="/notifications"
-                className={nav}
+                className={mobileNav}
                 title="Notifications"
               >
                 <span className="relative">
@@ -128,13 +155,19 @@ export default function NavBar() {
                   )}
                 </span>
 
-                <span className="hidden lg:inline">Notifications</span>
+                <span className="hidden lg:inline">
+                  Notifications
+                </span>
               </NavLink>
             </div>
 
             {/* RIGHT ACTIONS */}
-            <div className="flex shrink-0 items-center justify-end gap-1.5 sm:gap-2">
-
+            <div
+              className="
+                flex shrink-0 items-center justify-end
+                gap-0.5 sm:gap-2
+              "
+            >
               {/* THEME TOGGLE */}
               <button
                 type="button"
@@ -179,9 +212,18 @@ export default function NavBar() {
               {/* SETTINGS */}
               <NavLink
                 to="/settings"
-                className={nav}
                 title="Settings"
                 aria-label="Settings"
+                className={({ isActive }) =>
+                  `grid h-9 w-9 sm:h-10 sm:w-10 shrink-0
+                  place-items-center rounded-xl
+                  transition-all duration-200
+                  ${
+                    isActive
+                      ? "bg-gradient-to-r from-violet-100 to-purple-100 text-violet-700 shadow-sm dark:from-violet-500/20 dark:to-purple-500/20 dark:text-violet-300"
+                      : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
+                  }`
+                }
               >
                 <Setting2 size="19" />
               </NavLink>
@@ -204,7 +246,8 @@ export default function NavBar() {
                     src={photo}
                     alt="Profile"
                     className="
-                      h-9 w-9 rounded-full object-cover
+                      h-8 w-8 sm:h-9 sm:w-9
+                      rounded-full object-cover
                       ring-2 ring-white dark:ring-[#39304F]
                     "
                   />
@@ -213,7 +256,8 @@ export default function NavBar() {
                     src="/female-avatar.svg"
                     alt={`${user?.name ?? "User"} profile avatar`}
                     className="
-                      h-9 w-9 rounded-full object-cover
+                      h-8 w-8 sm:h-9 sm:w-9
+                      rounded-full object-cover
                       ring-2 ring-violet-200 dark:ring-violet-400/30
                     "
                   />
@@ -243,7 +287,6 @@ export default function NavBar() {
         ) : (
           /* GUEST NAVIGATION */
           <div className="col-span-2 flex items-center justify-end gap-2">
-
             <button
               type="button"
               onClick={toggleTheme}
