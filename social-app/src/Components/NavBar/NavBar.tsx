@@ -39,35 +39,47 @@ export default function NavBar() {
       window.removeEventListener("notifications:changed", refreshUnread);
   }, [token]);
 
-  // Navigation styles
-  // Mobile: compact
-  // Desktop: original sizing and spacing
+  // Navigation link styles
   const nav = ({ isActive }: { isActive: boolean }) =>
-    `group flex shrink-0 items-center justify-center
+    `group flex items-center justify-center
     gap-1 sm:gap-2
-    rounded-xl px-1.5 sm:px-3 py-2 sm:py-2.5
-    text-xs sm:text-sm font-semibold transition-all duration-200
+    rounded-xl px-0 sm:px-3
+    py-2 sm:py-2.5
+    text-xs sm:text-sm font-semibold
+    transition-all duration-200
     ${
       isActive
         ? "bg-gradient-to-r from-violet-100 to-purple-100 text-violet-700 shadow-sm dark:from-violet-500/20 dark:to-purple-500/20 dark:text-violet-300"
         : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
     }`;
 
-  // Equal navigation items on mobile only
-  // Restore original compact centered links on desktop
+  // Equal-width mobile navigation items
   const mobileNav = ({ isActive }: { isActive: boolean }) =>
     `${nav({ isActive })}
     flex-1 basis-0 min-w-0
     sm:flex-none sm:basis-auto sm:shrink-0`;
 
+  // Profile image
   const photo =
     profilePhotoPreview ??
     user?.photo ??
     user?.profilePhoto ??
     user?.image;
 
+  // Theme button
   const iconButtonClass =
     "grid h-8 w-8 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-violet-200/80 bg-white/70 text-violet-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md dark:border-violet-400/20 dark:bg-[#25213A] dark:text-violet-300 dark:hover:bg-violet-500/15";
+
+  // Settings button: same clickable dimensions as theme button
+  const settingsClass = ({ isActive }: { isActive: boolean }) =>
+    `grid h-8 w-8 sm:h-10 sm:w-10 shrink-0
+    place-items-center rounded-xl
+    transition-all duration-200
+    ${
+      isActive
+        ? "bg-gradient-to-r from-violet-100 to-purple-100 text-violet-700 shadow-sm dark:from-violet-500/20 dark:to-purple-500/20 dark:text-violet-300"
+        : "text-gray-500 hover:bg-violet-50 hover:text-violet-700 dark:text-gray-400 dark:hover:bg-violet-500/10 dark:hover:text-violet-300"
+    }`;
 
   return (
     <nav
@@ -86,7 +98,8 @@ export default function NavBar() {
         className="
           mx-auto grid w-full max-w-7xl
           grid-cols-[auto_minmax(0,1fr)_auto]
-          items-center gap-1 px-2 py-2.5
+          items-center gap-1
+          px-2 py-2.5
           sm:grid-cols-[auto_1fr_auto]
           sm:gap-4 sm:px-5
           lg:px-6
@@ -102,57 +115,68 @@ export default function NavBar() {
 
         {token ? (
           <>
-            {/* NAVIGATION LINKS */}
+            {/* CENTER NAVIGATION */}
             <div
               className="
-                flex min-w-0 items-center justify-center
-                gap-0 overflow-visible
-                sm:gap-1
+                flex min-w-0 w-full
+                items-center justify-center
+                gap-0 overflow-hidden
+                sm:gap-1 sm:overflow-visible
               "
             >
+              {/* HOME */}
               <NavLink
                 to="/posts"
                 className={mobileNav}
                 title="Home"
+                aria-label="Home"
               >
                 <Home2 size="19" />
                 <span className="hidden lg:inline">Home</span>
               </NavLink>
 
+              {/* COMMUNITY */}
               <NavLink
                 to="/community"
                 className={mobileNav}
                 title="Community"
+                aria-label="Community"
               >
                 <People size="19" />
                 <span className="hidden lg:inline">Community</span>
               </NavLink>
 
+              {/* SAVED POSTS */}
               <NavLink
                 to="/bookmarks"
                 className={mobileNav}
                 title="Saved posts"
+                aria-label="Saved posts"
               >
                 <Bookmark size="19" />
                 <span className="hidden lg:inline">Saved</span>
               </NavLink>
 
+              {/* NOTIFICATIONS */}
               <NavLink
                 to="/notifications"
                 className={mobileNav}
                 title="Notifications"
+                aria-label="Notifications"
               >
-                <span className="relative">
+                <span className="relative flex items-center justify-center">
                   <Notification size="19" />
 
                   {unread > 0 && (
                     <span
                       className="
                         absolute -right-2 -top-2
-                        flex min-h-4 min-w-4 items-center justify-center
+                        flex min-h-4 min-w-4
+                        items-center justify-center
                         rounded-full bg-gradient-to-r
                         from-violet-500 to-purple-600
-                        px-1 text-[10px] font-bold leading-4 text-white
+                        px-1 text-[10px] font-bold
+                        leading-4 text-white
                         shadow-md shadow-violet-500/30
                       "
                     >
@@ -171,7 +195,7 @@ export default function NavBar() {
             <div
               className="
                 flex shrink-0 items-center justify-end
-                gap-0 sm:gap-2
+                gap-1.5 sm:gap-2
               "
             >
               {/* THEME TOGGLE */}
@@ -190,8 +214,8 @@ export default function NavBar() {
                 {theme === "dark" ? (
                   <svg
                     viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
+                    width="19"
+                    height="19"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.8"
@@ -203,8 +227,8 @@ export default function NavBar() {
                 ) : (
                   <svg
                     viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
+                    width="19"
+                    height="19"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.8"
@@ -218,9 +242,9 @@ export default function NavBar() {
               {/* SETTINGS */}
               <NavLink
                 to="/settings"
-                className={nav}
                 title="Settings"
                 aria-label="Settings"
+                className={settingsClass}
               >
                 <Setting2 size="19" />
               </NavLink>
@@ -229,7 +253,8 @@ export default function NavBar() {
               <Link
                 to="/profile"
                 className="
-                  shrink-0 rounded-full p-0.5
+                  flex shrink-0 items-center justify-center
+                  rounded-full p-0.5
                   ring-2 ring-transparent
                   transition-all duration-200
                   hover:-translate-y-0.5
@@ -243,7 +268,7 @@ export default function NavBar() {
                     src={photo}
                     alt="Profile"
                     className="
-                      h-8 w-8 sm:h-9 sm:w-9
+                      h-7 w-7 sm:h-9 sm:w-9
                       rounded-full object-cover
                       ring-2 ring-white dark:ring-[#39304F]
                     "
@@ -253,7 +278,7 @@ export default function NavBar() {
                     src="/female-avatar.svg"
                     alt={`${user?.name ?? "User"} profile avatar`}
                     className="
-                      h-8 w-8 sm:h-9 sm:w-9
+                      h-7 w-7 sm:h-9 sm:w-9
                       rounded-full object-cover
                       ring-2 ring-violet-200 dark:ring-violet-400/30
                     "
