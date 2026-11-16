@@ -2,16 +2,16 @@
 export default function BrandLogo({ compact = false }: { compact?: boolean }) {
   return (
     <div
-      className="flex items-center gap-2 sm:gap-2.5"
+      className="ml-1 sm:ml-2 flex items-center gap-2 sm:gap-2.5"
       aria-label="VYBE social app"
     >
       {/* BRAND ICON */}
       <div
         className="
           relative grid
-          h-9 w-9 sm:h-11 sm:w-11
+          h-10 w-10 sm:h-11 sm:w-11
           place-items-center
-          rounded-[14px] sm:rounded-[17px]
+          rounded-[15px] sm:rounded-[17px]
           bg-gradient-to-br from-[#a78bfa] via-[#8255f2] to-[#5145bc]
           shadow-[0_7px_18px_rgba(114,71,227,.25)]
           sm:shadow-[0_9px_24px_rgba(114,71,227,.3)]
@@ -19,8 +19,8 @@ export default function BrandLogo({ compact = false }: { compact?: boolean }) {
         "
       >
         <svg
-          width="24"
-          height="24"
+          width="26"
+          height="26"
           viewBox="0 0 32 32"
           className="sm:w-[29px] sm:h-[29px]"
           fill="none"
