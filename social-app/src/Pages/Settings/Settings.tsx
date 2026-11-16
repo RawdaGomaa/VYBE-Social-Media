@@ -57,10 +57,10 @@ export default function Settings() {
   };
 
   const fieldClass =
-    "w-full rounded-2xl border border-violet-100 bg-[#F7F5FF] px-4 py-3.5 text-sm font-medium text-[#211936] outline-none transition-all duration-200 placeholder:text-[#A39BB5] hover:border-violet-200 focus:border-[#8B5CF6] focus:bg-white focus:ring-4 focus:ring-violet-500/10 dark:border-[#51416F] dark:bg-[#25213A] dark:text-[#F5F0FF] dark:placeholder:text-[#8984A3] dark:hover:border-violet-400 dark:focus:border-violet-400 dark:focus:bg-[#29243F]";
+    "w-full min-w-0 rounded-2xl border border-[#E4DCF5] bg-white px-4 py-3.5 text-sm font-medium text-[#211936] outline-none transition-all duration-200 placeholder:text-[#8D849F] hover:border-[#C9B8ED] focus:border-[#8B5CF6] focus:bg-white focus:ring-4 focus:ring-violet-500/10 dark:border-[#51416F] dark:bg-[#25213A] dark:text-[#F5F0FF] dark:placeholder:text-[#8984A3] dark:hover:border-violet-400 dark:focus:border-violet-400 dark:focus:bg-[#29243F]";
 
   return (
-    <main className="mx-auto min-h-[calc(100vh-80px)] w-full max-w-4xl px-4 py-8 sm:px-6">
+    <main className="mx-auto min-h-[calc(100vh-80px)] w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-10">
 
       {/* Header */}
       <section className="mb-8">
@@ -72,18 +72,18 @@ export default function Settings() {
           Account <span className="text-[#8B5CF6]">Settings</span>
         </h1>
 
-        <p className="mt-2 text-sm text-[#89859A] dark:text-[#AAA4BD]">
+        <p className="mt-2 text-sm leading-relaxed text-[#746B88] dark:text-[#AAA4BD]">
           Manage your security and keep your account protected.
         </p>
       </section>
 
       {/* Password Card */}
-      <section className="premium-panel overflow-hidden">
+      <section className="premium-panel overflow-hidden rounded-3xl border border-[#EAE3F7] bg-white shadow-[0_8px_30px_rgba(70,45,120,0.06)] dark:border-[#383651]">
 
-        <div className="border-b border-violet-100 p-5 sm:p-7 dark:border-[#383651]">
-          <div className="flex items-center gap-4">
+        <div className="border-b border-[#EAE3F7] p-5 sm:p-7 dark:border-[#383651]">
+          <div className="flex min-w-0 items-center gap-4">
 
-            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-violet-100 text-[#8B5CF6] dark:bg-[#34294E]">
+            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#F0E9FF] text-[#8B5CF6] dark:bg-[#34294E]">
               <svg
                 width="27"
                 height="27"
@@ -100,12 +100,12 @@ export default function Settings() {
               </svg>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h2 className="text-lg font-extrabold text-[#282040] dark:text-[#F1ECFF]">
                 Change password
               </h2>
 
-              <p className="mt-1 text-xs text-[#9891A9] dark:text-[#AAA4BD]">
+              <p className="mt-1 text-xs leading-relaxed text-[#817791] dark:text-[#AAA4BD]">
                 Update your password to keep your account secure.
               </p>
             </div>
@@ -115,7 +115,7 @@ export default function Settings() {
 
         <form
           onSubmit={handleSubmit(submit)}
-          className="space-y-5 p-5 sm:p-7"
+          className="space-y-5 bg-white p-5 sm:p-7 dark:bg-transparent"
         >
 
           {/* Error */}
@@ -125,7 +125,7 @@ export default function Settings() {
               className="flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-600 dark:border-red-400/20 dark:bg-red-500/10 dark:text-red-300"
             >
               <span>ⓘ</span>
-              <p>{error}</p>
+              <p className="break-words">{error}</p>
             </div>
           )}
 
@@ -145,7 +145,7 @@ export default function Settings() {
               Security information
             </h3>
 
-            <p className="mb-5 text-xs text-[#9891A9] dark:text-[#AAA4BD]">
+            <p className="mb-5 text-xs leading-relaxed text-[#817791] dark:text-[#AAA4BD]">
               Enter your current password before choosing a new one.
             </p>
 
@@ -162,7 +162,7 @@ export default function Settings() {
               />
             </Input>
 
-            <div className="my-6 border-t border-violet-100 dark:border-[#383651]" />
+            <div className="my-6 border-t border-[#EAE3F7] dark:border-[#383651]" />
 
             <Input
               label="New password"
@@ -192,12 +192,12 @@ export default function Settings() {
           </div>
 
           {/* Password Requirements */}
-          <div className="rounded-2xl border border-violet-100 bg-violet-50/60 p-4 dark:border-[#51416F] dark:bg-[#242039]">
-            <p className="mb-3 text-xs font-extrabold text-[#51456E] dark:text-[#E5DCFA]">
+          <div className="rounded-2xl border border-[#E5D9FA] bg-[#F8F5FF] p-4 dark:border-[#51416F] dark:bg-[#242039]">
+            <p className="mb-3 text-xs font-extrabold text-[#493765] dark:text-[#E5DCFA]">
               Password requirements
             </p>
 
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
                 "At least 8 characters",
                 "One uppercase letter",
@@ -206,9 +206,9 @@ export default function Settings() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-2 text-xs text-[#89819D] dark:text-[#AAA4BD]"
+                  className="flex min-w-0 items-center gap-2 text-xs font-medium text-[#75698B] dark:text-[#AAA4BD]"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#8B5CF6]" />
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#8B5CF6]" />
                   {item}
                 </div>
               ))}
@@ -228,16 +228,16 @@ export default function Settings() {
       </section>
 
       {/* Logout Section */}
-      <section className="mt-6 rounded-3xl border border-red-100 bg-white p-5 shadow-sm dark:border-red-400/20 dark:bg-[#1B1C32] sm:p-6">
+      <section className="mt-6 rounded-3xl border border-[#F6DCDC] bg-white p-5 shadow-[0_5px_20px_rgba(70,45,120,0.04)] dark:border-red-400/20 dark:bg-[#1B1C32] sm:p-6">
 
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
 
-          <div>
+          <div className="min-w-0">
             <h3 className="font-extrabold text-[#282040] dark:text-[#F1ECFF]">
               Sign out
             </h3>
 
-            <p className="mt-1 text-xs text-[#9891A9] dark:text-[#AAA4BD]">
+            <p className="mt-1 text-xs leading-relaxed text-[#817791] dark:text-[#AAA4BD]">
               Sign out of your VYBE account on this device.
             </p>
           </div>
@@ -245,7 +245,7 @@ export default function Settings() {
           <button
             type="button"
             onClick={logout}
-            className="rounded-xl border border-red-200 bg-red-50 px-5 py-2.5 text-sm font-bold text-red-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-100 dark:border-red-400/20 dark:bg-red-500/10 dark:text-red-300 dark:hover:bg-red-500/20"
+            className="w-full shrink-0 rounded-xl border border-red-200 bg-red-50 px-5 py-2.5 text-sm font-bold text-red-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-100 dark:border-red-400/20 dark:bg-red-500/10 dark:text-red-300 dark:hover:bg-red-500/20 sm:w-auto"
           >
             Logout
           </button>
@@ -253,7 +253,7 @@ export default function Settings() {
         </div>
       </section>
 
-      <p className="mt-6 text-center text-xs text-[#AAA4B6] dark:text-[#77738F]">
+      <p className="mt-6 text-center text-xs text-[#827A91] dark:text-[#77738F]">
         VYBE · Good things start with a conversation.
       </p>
 
@@ -271,14 +271,14 @@ function Input({
   children: React.ReactNode;
 }) {
   return (
-    <label className="mb-4 block">
+    <label className="mb-4 block min-w-0">
       <span className="mb-2 block text-sm font-semibold text-[#29243C] dark:text-[#E9E3F8]">
         {label}
       </span>
 
       {children}
 
-      <span className="mt-1 block min-h-5 text-xs text-red-500 dark:text-red-400">
+      <span className="mt-1 block min-h-5 break-words text-xs text-red-600 dark:text-red-400">
         {error}
       </span>
     </label>
